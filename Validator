@@ -1,0 +1,65 @@
+import java.util.Scanner;
+public class Validator extends Card {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Please enter a card number, only digits.");
+		double cardNumber = scanner.nextDouble();
+		System.out.println("Please answer the fincancial institution the card is from. Provide proper spacing.");
+		String cardType = scanner.next();
+		double firstDig = Double.parseDouble(Double.toString(cardNumber).substring(0, 1));
+		double firstTwo = Double.parseDouble(Double.toString(cardNumber).substring(0, 2));
+		Card card = new Card(cardNumber, cardType);
+		if(cardType.equalsIgnoreCase("Visa"))
+		{
+			if(firstDig == 4)
+			{
+			if(card.getLength() == 13 || card.getLength() == 16)
+			{
+				if (isValid(card) == true)
+				{
+					System.out.println("This is a valid " + cardType + " card.");
+				}
+				else System.out.println("This card is not valid");
+			}
+			else System.out.println("Not a valid Visa card");
+			}
+			else System.out.println("Not a valid Visa card");
+		}//end visa
+		if(cardType.equalsIgnoreCase("Master Card"))
+		{
+			if(firstTwo == 51 || firstTwo == 52 || firstTwo == 53 || firstTwo == 54 || firstTwo == 55)
+			{
+				if(card.getLength() == 16)
+				{
+					if (isValid(card) == true)
+					{
+						System.out.println("This is a valid " + cardType + " card.");
+					}
+					else System.out.println("This card is not valid");
+				}
+				else System.out.println("Not a valid Master Card card");
+			}
+			else System.out.println("Not a valid Master Card card"); 
+		}//end mastercard
+		if(cardType.equalsIgnoreCase("American Express"))
+		{
+			if (firstTwo == 34 || firstTwo == 37)
+			{
+				if(card.getLength() == 15)
+				{
+					if (isValid(card) == true)
+					{
+						System.out.println("This is a valid " + cardType + " card.");
+					}
+					else System.out.println("This card is not valid");
+				}
+				else System.out.println("Not a valid American Express card");
+			}
+			else System.out.println("Not a valid American Express card");
+		}//end am-ex
+		
+
+	}
+
+}
