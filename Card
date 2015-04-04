@@ -1,0 +1,63 @@
+
+public class Card {
+	private static double num;
+	private String type;
+	public Card()
+	{
+		num = 0;
+	}
+	public Card (double n, String t)
+	{
+		num = n;
+		type = t;
+	}
+	public int getLength()
+	{
+		int length = (int)Math.log10(num) + 1;
+		return length;
+	}
+	public static double reverse (double num)
+	{
+		double result = 0;
+		double remainder;
+		while (num > 0)
+		{
+			remainder = num % 10;
+			num = num / 10;
+			result = result * 10 + remainder;
+		}
+		return result;
+	}
+	public static boolean isValid(Card c)
+	{
+		double rev = reverse(num);
+		int arraySpot = 0;
+		double[] nums = new double[c.getLength() / 2];
+		for (int i = 1; i < c.getLength(); i = i + 2)
+		{
+			double temp = Double.parseDouble(Double.toString(rev).substring(i, i+1));
+			if (temp >= 10)
+			{
+				double ethan = temp % 10;
+				nums[arraySpot] = ethan;
+				arraySpot++;
+				nums[arraySpot] = 1;
+			}
+			else nums[arraySpot] = temp;
+			arraySpot++;
+		}
+		double sum = 0;
+		for (int i = 0; i < nums.length; i++)
+		{
+			double temp = nums[i];
+			sum = sum + temp;
+		}
+		if (sum % 10 == 0)
+		{
+			return true;
+		}
+		else return false;
+	}
+	
+
+}
